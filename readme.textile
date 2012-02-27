@@ -8,7 +8,7 @@ SVNWeaver is a Dreamweaver Extension that TortoiseSVN.
 
 h4. Localisations:
 
-* English "https://github.com/downloads/ChrisMcKee/svnweaver/SVNWeaver-1.4.0%20-%20ENGLISH.zip":https://github.com/downloads/ChrisMcKee/svnweaver/SVNWeaver-1.4.0%20-%20ENGLISH.zip
+* English "https://github.com/downloads/ChrisMcKee/svnweaver/20120227%20%20-%201.4.0%20English%20release.zip":https://github.com/downloads/ChrisMcKee/svnweaver/20120227%20%20-%201.4.0%20English%20release.zip
 
 
 ----------------------------------------------------------------------------------------------------------------------
