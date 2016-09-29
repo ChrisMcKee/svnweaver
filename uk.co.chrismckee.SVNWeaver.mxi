@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<macromedia-extension
+	 name="SVNWeaver" id="uk.co.chrismckee.SVNWeaver"
+	 version="1.4.3"
+	 type="utility"
+	 requires-restart="true">
+
+
+	<author name="Chris McKee (chrismckee.co.uk)" />
+
+	<products>
+		<product name="Dreamweaver" version="6" primary="true" />
+	</products>
+
+	<description>
+	<![CDATA[
+	TortoiseSVN (Version control) plugin for Subversion (SVN).
+	]]>
+	</description>
+
+	<ui-access>
+	<![CDATA[
+	Access SVN functionality from within the Dreamweaver IDE.<br>
+	This plugin will insert a SVN menu, which provides access to the basic functionality.<br>
+	Code Copyright Chris McKee<br>
+	Downloaded From: <a href="http://chrismckee.co.uk/turtleweaver/">http://chrismckee.co.uk/turtleweaver/</a> (check for updates)
+	Please log any errors at the github page (linked from the above site)<br>
+	or drop me an email pcdevils[at]gmail.com thanks.<br>
+	--------------------------------------------------<br>
+	REQUIREMENT<br>
+	You must install the correct TortoiseSVN for your system.
+	--------------------------------------------------<br>
+	<b>[BUILT 2010-2013 by] <a href="http://chrismckee.co.uk">Chris McKee</a><b>
+	]]>
+	</ui-access>
+
+	<license-agreement>
+	<![CDATA[
+	Copyright (c) 2010-2013 Chris McKee (chrismckee.co.uk)
+	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.	]]>
+	</license-agreement>
+
+	<files>
+		<file source="SVNWeaver.htm" destination="$dreamweaver/configuration/menus/SVNWeaver" />
+	</files>
+
+	<configuration-changes>
+		<menu-insert insertAfter="DWMenu_Commands" skipSeparator="true">
+			<menu id="SVNWeaver" name="_SVN"></menu>
+		</menu-insert>
+		<menu-insert appendTo="SVNWeaver">
+			<menuitem id="SVNWeaver_Update_Menu" name="SVN Update" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'update','menu'" />
+			<menuitem id="SVNWeaver_Commit_Menu" name="SVN Commit" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'commit','menu'" />
+		</menu-insert>
+		<menu-insert insertAfter="SVNWeaver_Commit_Menu" skipSeparator="true">
+			<menu id="TortoiseSVN" name="TortoiseSVN">
+		</menu>
+		</menu-insert>
+		<menu-insert appendTo="TortoiseSVN">
+			<menuitem id="SVNWeaver_Log_Menu" name="Show log" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'log','menu'" />
+			<menuitem id="SVNWeaver_Repobrowser_Menu" name="Repo-browser" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'repobrowser','menu'" />
+			<menuitem id="SVNWeaver_Repostatus_Menu" name="Check for modifications" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'repostatus','menu'" />
+			<menuitem id="SVNWeaver_Revisiongraph_Menu" name="Revision Graph" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'revisiongraph','menu'" />
+			<separator />
+			<menuitem id="SVNWeaver_UpdateRev_Menu" name="Update to revision" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'update','menu'" />
+			<menuitem id="SVNWeaver_Rename_Menu" name="Rename" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'rename','menu'" />
+			<menuitem id="SVNWeaver_Delete_Menu" name="Delete" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'delete','menu'" />
+			<menuitem id="SVNWeaver_Lock_Menu" name="Lock" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'lock','menu'" />
+			<menuitem id="SVNWeaver_Unlock_Menu" name="Unlock" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'unlock','menu'" />
+			<separator />
+			<menuitem id="SVNWeaver_Blame_Menu" name="Blame" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'blame','menu'" />
+			<separator />
+			<menuitem id="SVNWeaver_Createpatch_Menu" name="Create patch" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'createpatch','menu'" />
+			<menuitem id="SVNWeaver_Properties_Menu" name="Properties" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'properties','menu'" />
+			<menuitem id="SVNWeaver_Cloak_Menu" name="Cloak SVN Folders" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'cloak','menu'" />
+			<separator />
+			<menuitem id="SVNWeaver_Help_Menu" name="Help" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'help','menu'" />
+			<menuitem id="SVNWeaver_Settings_Menu" name="Settings" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'settings','menu'" />
+			<menuitem id="SVNWeaver_About_Menu" name="About" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'about','menu'" />
+		</menu-insert>
+		<menu-insert insertAfter="DWContext_LocalSite_Synchronize" skipSeparator="true">
+			<separator />
+			<menu id="SVNWeaver_Site" name="SVN">
+			</menu>
+			<menuitem id="SVNWeaver_Commit_Site" name="Commit" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'commit','site'" />
+			<menuitem id="SVNWeaver_Update_Site" name="Update" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'update','site'" />
+			<menuitem id="SVNWeaver_Log_Site" name="Show Log" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'log','site'" />
+			<separator />
+		</menu-insert>
+		<menu-insert appendTo="SVNWeaver_Site">
+			<menuitem id="SVNWeaver_Commit_Site" name="Commit" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'commit','site'" />
+			<menuitem id="SVNWeaver_Update_Site" name="Update" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'update','site'" />
+			<menuitem id="SVNWeaver_Add_Site" name="Add" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'add','site'" />
+			<menuitem id="SVNWeaver_Remove_Site" name="Delete" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'remove','site'" />
+			<menuitem id="SVNWeaver_Revert_Site" name="Revert" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'revert','site'" />
+			<menuitem id="SVNWeaver_Ignore_Site" name="Ignore" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'ignore','site'" />
+			<separator />
+			<menuitem id="SVNWeaver_Lock_Site" name="Lock" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'lock','site'" />
+			<menuitem id="SVNWeaver_Unlock_Site" name="Unlock" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'unlock','site'" />
+			<separator />
+			<menuitem id="SVNWeaver_Log_Site" name="Show Log" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'log','site'" />
+			<menuitem id="SVNWeaver_Diff_Site" name="Diff" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'diff','site'" />
+			<menuitem id="SVNWeaver_Blame_Site" name="Blame" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'blame','site'" />
+			<menuitem id="SVNWeaver_Cloak_Site" name="Cloak SVN Folders" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'cloak','site'" />
+			<separator />
+			<menuitem id="SVNWeaver_Updateavailable_Site" name="Check for Update" file="Menus/SVNWeaver/SVNWeaver.htm" arguments="'updateavailable','site'" />
+		</menu-insert>
+	</configuration-changes>
+</macromedia-extension>

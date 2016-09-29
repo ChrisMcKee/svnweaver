@@ -1,0 +1,149 @@
+<html>
+</head>
+<script type="text/javascript">
+//<![CDATA[
+var currentVersion = "1.4.2";
+
+//Registry
+var regHIVE, regKEY, regVALUE, tsvnPATH;
+
+/* Can Accept Command
+   Returns: Bool
+*/
+var canAcceptCommand = function()
+{
+	var locFUNC = arguments[0];
+	var uiLOC = arguments[1];
+	//MENU CHECK
+	if (dw.getDocumentDOM() == null && locFUNC != "about" && locFUNC != "settings" && locFUNC != "help" && locFUNC != "cloak" && uiLOC == "menu")
+	{
+		return false;
+	}
+	//RIGHTCLICK CHECK 
+	//TODO: Removed !isSVN(DWfile) &&  from start of following statement
+	if (locFUNC != "about" && locFUNC != "settings" && locFUNC != "help" && locFUNC != "cloak" && locFUNC != "updateavailable" && uiLOC == "site")
+	{
+		return false;
+	}
+
+	return true;
+}
+
+/* Version Control */
+var updateAvailable = function(){
+	var WebVersion = MMHttp.getText("http://chrismckee.co.uk/turtleweaver/svnweaverdwextversion");
+	if(parseInt(WebVersion.statusCode) == 200)
+	{
+		if(parseFloat(WebVersion.data) > parseFloat(currentVersion)){ alert("There is an Update Available at http://bit.ly/svnweaver"); }
+		else{ alert("Current Installed Version: " + currentVersion + "\nWeb Version: "+ WebVersion.data); }
+	}else{ alert("Couldn't Connect to server, please check the site; your version is " + currentVersion); }
+}
+
+/* Which Platform */
+var setPlatformReg = function(){
+    if(DWfile.getPlatform().indexOf("win32") > -1)
+    {
+		//Win32
+		regHIVE= 'HKEY_LOCAL_MACHINE';
+		regKEY = 'SOFTWARE\\TortoiseSVN';
+		regVALUE='ProcPath';
+    }
+    else
+    {
+		//Win64
+		regHIVE= 'HKEY_LOCAL_MACHINE';
+		regKEY = 'SOFTWARE\\TortoiseSVN';
+		regVALUE='ProcPath';
+    }
+	
+    tsvnPATH = MM.regGetValue(regHIVE, regKEY, regVALUE);
+	//IF User hasnt installed SVN
+	if(tsvnPATH === "") alert("*** YOU NEED TO INSTALL TORTOISESVN ***\nYOU CAN GET THIS FROM\nhttp:\/\/bit.ly\/tsvn32bit \n --------------------");
+	
+}
+
+
+/* Argument Handler */
+var receiveArguments = function()
+{
+	//Populate Windows BIT Version (x86 or x64)
+	setPlatformReg();
+
+    if (arguments.length !== 2) return;
+
+    var locFUNC = arguments[0], uiLOC = arguments[1];
+	
+	if (locFUNC === "updateavailable") updateAvailable();
+
+    if (locFUNC === "about" || locFUNC === "settings" || locFUNC === "help")
+    {
+      var args = '/command:' + locFUNC + ' /notempfile'
+      MM.shellExecute(tsvnPATH, args, "");
+    }
+    else if(locFUNC === "cloak")
+    {
+      //checkFolder(site.siteRelativeToLocalPath("/"),DWfile);
+      site.refresh("local");
+    }
+    else if(uiLOC == "menu")
+    {
+      var args = '/command:' + locFUNC + ' /path:\"' + convertToPath(dw.getDocumentDOM().URL) + '\" /notempfile'
+      MM.shellExecute(tsvnPATH, args, "");
+    }
+	else if(uiLOC === "site")
+    {
+      if(locFUNC === "add" || locFUNC === "remove" || locFUNC === "revert" || locFUNC === "ignore" || locFUNC === "lock" || locFUNC === "unlock" || locFUNC === "commit")
+      {
+        var args = '/command:' + locFUNC + ' /path:\"' + fileArrayToString(site.getSelection()) + '\" /notempfile'
+        MM.shellExecute(tsvnPATH, args, "");
+      }
+      else
+      {
+        var args = '/command:' + locFUNC + ' /path:\"' + convertToPath(site.getSelection()[0]) + '\" /notempfile'
+        MM.shellExecute(tsvnPATH, args, "");
+      }
+    
+    }
+}//END ARG HANDLER
+
+
+var convertToPath = function(file){	return file.substring(8).replace("|",":"); }
+
+var fileArrayToString = function(files)
+{
+	var fileString = convertToPath(files[0]);
+		for(i = 1; i < files.length; i++)
+		  fileString = fileString + '*' + convertToPath(files[i]);
+		  
+	return fileString; 
+}
+
+var isSVN = function(dwf)
+{
+	var folderRootDir = site.siteRelativeToLocalPath("/");
+	var cacheFile = folderRootDir + ".dwsvncheck";
+	var selectedFolderDepth = convertToPath(site.getSelection()[0]);
+	
+	if(!DWfile.exists(folderRootDir + ".dwsvncheck")){
+   	 MM.createProcess('c:\\windows\\System32\\cmd.exe', '/P /K svn status && exit', 2, true, selectedFolderDepth, folderRootDir + ".dwsvncheck");
+	}
+	var fileURL = folderRootDir + '.dwsvncheck'; 
+	var str = DWfile.read(fileURL); 
+	if (str){ 
+		var match = /is not a working copy/g;
+		if(match.test(str)){
+	    	DWfile.remove(fileURL);
+	    	//alert("This is not an SVN Directory");
+	    	return false;
+	    }
+	}
+
+	return true;
+}
+
+//]]>
+</script>
+</head>
+<body>
+</body>
+</html>
