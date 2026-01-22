@@ -1,5 +1,3 @@
-h2. NOTICE - I'll sort this out verrrrrry soon (Github have dropped downloads)
-
 h1. SVNWeaver - SVN for Dreamweaver
 Part of "TurtleWeaver":http://turtleweaver.co.uk/
 from "chrismckee.co.uk":http://chrismckee.co.uk/?utm_source=Github&utm_medium=SVNWeaver&utm_campaign=website-link
@@ -57,6 +55,7 @@ INSTALL TORTOISESVN x86 (32BIT) ALONG SIDE YOUR EXISTING INSTALLATION OF TORTOIS
 "Note for X64 users: you can install both the 32 and 64-bit version side by side.
 This will enable the TortoiseSVN features in Explorer (x64) and other 64bit applications and also for 32-bit applications."
 Dreamweaver CS/CS2/CS3/CS4/CS5 are 32bit applications.
+
 
 
 h4. Code Copyright Chris McKee 2009-2012
